@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Data</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	function multiImage() {
+		if ($("#mulimmg")[0].files.length > 5) {
+	        alert("You can select only 5 images");
+	        $('#sub').hide();
+	    } else {
+	    	$('#sub').show();
+	    }
+	}
+	function ageCalculator() {  
+	    var userinput = document.getElementById("doib").value;  
+	    var dob = new Date(userinput);  
+	    if(userinput==null || userinput=='') {  
+	      document.getElementById("message").innerHTML = "**Choose a date please!";    
+	      return false;   
+	    } else {  
+	      
+		    //calculate month difference from current date in time  
+		    var month_diff = Date.now() - dob.getTime();  
+		      
+		    //convert the calculated difference in date format  
+		    var age_dt = new Date(month_diff);   
+		      
+		    //extract year from date      
+		    var year = age_dt.getUTCFullYear();  
+		      
+		    //now calculate the age of the user  
+		    var age = Math.abs(year - 1970);  
+	      	if(age<18){
+	      		$('.minorEml').hide();
+	      		$('.minorMob').hide();
+	      	}
+	      	else{
+	      		$('.minorEml').show();
+	      		$('.minorMob').show();
+	      	}
+	    	
+	    } 
+
+	}  
+</script>
+</head>
+<body>
+	<div>
+		<center>
+			<div>
+				<table>
+					<form action="index.php" method="post" enctype="multipart/form-data">
+						<tr>
+							<td>
+								Username:
+							</td>
+							<td>
+								<input type="text" name="uname" placeholder="Enter Username" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Email ID:
+							</td>
+							<td>
+								<input type="Email" name="mail" placeholder="Enter Username" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Password:
+							</td>
+							<td>
+								<input type="Password" name="pwd" placeholder="Enter Password" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Re-enter Password:
+							</td>
+							<td>
+								<input type="Password" name="rpwd" placeholder="Re-enter Password" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Date Of Birth:
+							</td>
+							<td>
+								<input type="Date" name="doi" id="doib" onchange="ageCalculator()" placeholder="Enter your Date Of Birth"  required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Mobile Number:
+							</td>
+							<td>
+								<input type="Number" name="mobile" placeholder="Enter Mobile Number " required="required" maxlength="10">
+							</td>
+						</tr>
+						<tr class="minorEml">
+							<td>
+								Gurdian Email ID:
+							</td>
+							<td>
+								<input type="email" name="gml" placeholder="Enter Guardian email address"  >
+							</td>
+							
+						</tr>
+						<tr class="minorMob">
+							<td>
+								Gurdian Mobile Number:
+							</td>
+							<td>
+								<input type="Number" name="gmob" placeholder="Enter Gurdian mobile number" >
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								Address Line1:
+							</td>
+							<td>
+								<input type="text" name="add1" placeholder="Enter Address line 1">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Address Line2:
+							</td>
+							<td>
+								<input type="text" name="add2" placeholder="Enter Address line 2" >
+							</td>
+						</tr>
+						<tr>
+							<td>
+								City:
+							</td>
+							<td>
+								<input type="text" name="city" placeholder="Enter your city" >
+							</td>
+						</tr>
+						<tr>
+							<td>
+								State:
+							</td>
+							<td>
+								<input type="text" name="state" placeholder="Enter your state" >
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Reason of registration:
+							</td>
+							<td>
+								<input type="text" name="regon" placeholder="Enter reason for registration" >
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Uplaod pdf file:
+							</td>
+							<td>
+								<input type="File" name="pdfupd">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Uplaod Image file:
+							</td>
+							<td>
+								<input type="File" id="mulimmg" name="imgupd[]" multiple="true" onchange="multiImage()">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="right">
+								<input type="submit" id="sub" name="submit"  >
+							</td>
+						</tr>
+					</form>
+				</table>
+			</div>
+		</center>
+	</div>
+</body>
+</html>
